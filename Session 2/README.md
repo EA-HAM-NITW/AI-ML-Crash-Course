@@ -1,3 +1,7 @@
+# Correcting the format for equations in markdown using proper LaTeX syntax
+
+logistic_regression_content = """
+
 # Introduction to Logistic Regression
 
 ## 1. What is Logistic Regression?
@@ -16,9 +20,11 @@ Logistic regression is a **classification algorithm** that predicts the probabil
 ## 3. Sigmoid Function
 
 The sigmoid function transforms the linear equation into a probability value:
-\[
-\sigma(z) = rac{1}{1 + e^{-z}}
-\]
+
+$$
+\\sigma(z) = \\frac{1}{1 + e^{-z}}
+$$
+
 The output is a probability between 0 and 1. The decision boundary is typically set at 0.5: if the output is greater than 0.5, the instance is classified as 1 (positive), otherwise, it is 0 (negative).
 
 ---
@@ -26,27 +32,30 @@ The output is a probability between 0 and 1. The decision boundary is typically 
 ## 4. Logistic Regression Hypothesis Function
 
 The logistic regression hypothesis is:
-\[
-h\_ heta(x) = \sigma( heta_0 + heta_1 x_1 + \dots + heta_n x_n)
-\]
-Where `theta` represents the learned parameters, and `x` represents the input features.
+
+$$
+h_{\\theta}(x) = \\sigma(\\theta_0 + \\theta_1 x_1 + \\dots + \\theta_n x_n)
+$$
+
+Where `\\theta` represents the learned parameters, and `x` represents the input features.
 
 ---
 
 ## 5. Cost Function (Log Loss)
 
 The cost function for logistic regression, called **log loss** or **binary cross-entropy**, is:
-\[
-J( heta) = -rac{1}{m} \sum*{i=1}^{m} \left[ y^{(i)} \log(h* heta(x^{(i)})) + (1 - y^{(i)}) \log(1 - h\_ heta(x^{(i)}))
-ight]
-\]
+
+$$
+J(\\theta) = -\\frac{1}{m} \\sum_{i=1}^{m} \\left[ y^{(i)} \\log(h_{\\theta}(x^{(i)})) + (1 - y^{(i)}) \\log(1 - h_{\\theta}(x^{(i)})) \\right]
+$$
+
 This function helps to minimize the difference between the predicted probabilities and the actual labels.
 
 ---
 
 ## 6. Gradient Descent and Optimization
 
-Gradient descent is used to find the optimal parameters \( heta \) by iteratively adjusting them in the direction that reduces the cost function. In **scikit-learn**, optimization is handled internally using algorithms like **L-BFGS**.
+Gradient descent is used to find the optimal parameters \( \\theta \) by iteratively adjusting them in the direction that reduces the cost function. In **scikit-learn**, optimization is handled internally using algorithms like **L-BFGS**.
 
 ---
 
@@ -104,21 +113,3 @@ print(classification_report(y_test, y_pred))
 probabilities = model.predict_proba(X_test)
 print(probabilities[:5])
 ```
-
-## Explanation of Code:
-
-- **Train-test split**: The dataset is divided into training and test sets to evaluate the model on unseen data.
-- **Model fitting**: The logistic regression model is trained on the training set.
-- **Prediction and evaluation**: The model is used to predict test labels, and its accuracy and classification performance are evaluated.
-- **Probability predictions**: Optionally, you can use `predict_proba` to get the predicted probabilities for each class.
-
----
-
-## 9. Pros and Cons of Logistic Regression
-
-- **Pros**: Simple, interpretable, works well with linearly separable data.
-- **Cons**: Struggles with non-linear relationships (can be extended using techniques like polynomial or kernel transformations).
-
-## 10. When to Use Logistic Regression
-
-- Logistic regression works well for smaller datasets and when the relationship between features and the target is approximately linear.
