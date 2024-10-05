@@ -112,25 +112,19 @@ After performing the linear transformation, an activation function \( f \) is ap
 
 - **ReLU (Rectified Linear Unit)**:
 
-  \[
   f(x) = \text{max}(0, x)
-  \]
 
   ReLU is widely used due to its ability to mitigate the vanishing gradient problem.
 
 - **Sigmoid**:
 
-  \[
   f(x) = \frac{1}{1 + e^{-x}}
-  \]
 
   Sigmoid is useful for binary classification tasks, as it squashes the input between 0 and 1.
 
 - **Tanh (Hyperbolic Tangent)**:
 
-  \[
   f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
-  \]
 
   Tanh outputs values between -1 and 1, making it suitable for tasks where outputs should be centered around zero.
 
