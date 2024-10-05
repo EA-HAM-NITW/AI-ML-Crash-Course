@@ -1,3 +1,5 @@
+# README.md
+
 ## Neural Networks and Fully Connected Layers
 
 ### Introduction
@@ -18,11 +20,11 @@ Y = f(WX + b)
 
 Where:
 
-- \( X \): Input vector (of size \( n \), representing the number of features).
-- \( W \): Weight matrix (of size \( m \times n \), where \( m \) is the number of neurons in the layer and \( n \) is the number of input features.
-- \( b \): Bias vector (of size \( m \), which is added to each neuron's output.
-- \( f \): Activation function (e.g., ReLU, Sigmoid, Tanh).
-- \( Y \): Output vector (of size \( m \), representing the output of the layer.
+- \(X\): Input vector (of size \(n\), representing the number of features).
+- \(W\): Weight matrix (of size \(m \times n\), where \(m\) is the number of neurons in the layer and \(n\) is the number of input features).
+- \(b\): Bias vector (of size \(m\), which is added to each neuron's output).
+- \(f\): Activation function (e.g., ReLU, Sigmoid, Tanh).
+- \(Y\): Output vector (of size \(m\), representing the output of the layer.
 
 #### Matrix Representation of the Fully Connected Layer
 
@@ -34,16 +36,16 @@ Y = f(WX + b)
 
 Where:
 
-- \( X \): Input vector of size \( (n, 1) \).
-- \( W \): Weight matrix of size \( (m, n) \).
-- \( b \): Bias vector of size \( (m, 1) \).
-- \( Y \): Output vector of size \( (m, 1) \).
+- \(X\) is the input vector of size \((n, 1)\),
+- \(W\) is the weight matrix of size \((m, n)\),
+- \(b\) is the bias vector of size \((m, 1)\),
+- \(Y\) is the output vector of size \((m, 1)\).
 
 ---
 
 ### Batched Inputs and Matrix Dimensions
 
-In many real-world scenarios, it is common to process multiple inputs at once, known as **batched inputs**. When dealing with batched inputs, the input \( X \) becomes a matrix rather than a vector. The dimensions for batched inputs are as follows:
+In many real-world scenarios, it is common to process multiple inputs at once, known as **batched inputs**. When dealing with batched inputs, the input \(X\) becomes a matrix rather than a vector. The dimensions for batched inputs are as follows:
 
 - **Batch Size (B)**: The number of input examples processed at the same time.
 - **Input Matrix (X)**: \( (B, n) \), where \( B \) is the batch size and \( n \) is the number of features for each input.
@@ -51,32 +53,56 @@ In many real-world scenarios, it is common to process multiple inputs at once, k
 - **Bias Vector (b)**: \( (m, 1) \), bias for each neuron.
 - **Output Matrix (Y)**: \( (B, m) \), where each row represents the output for one input example.
 
-The operation becomes:
+---
+
+### Matrix Multiplication for Unbatched Inputs
+
+For a single input (unbatched), the operation in a fully connected layer can be represented as:
 
 \[
-Z = XW^T + b
+Y = W \cdot X + b
 \]
 
 Where:
 
-- \( Z \) is the pre-activation output of size \( (B, m) \),
-- \( W^T \) is the transpose of the weight matrix, allowing matrix multiplication with the input \( X \),
-- \( b \) is the bias vector, which is broadcasted across all batch inputs.
+- \(X\) is the input vector of size \((n, 1)\),
+- \(W\) is the weight matrix of size \((m, n)\),
+- \(b\) is the bias vector of size \((m, 1)\),
+- \(Y\) is the output vector of size \((m, 1)\).
 
-#### Example of Matrix Sizes for Batched Inputs
+#### Example (Unbatched Input):
 
-Let’s consider an example where:
+- Let the input \( X \) be of size \( (3, 1) \) (3 features),
+- Let the weight matrix \( W \) be of size \( (4, 3) \) (4 neurons, 3 input features),
+- Let the bias vector \( b \) be of size \( (4, 1) \).
 
-- **Batch Size (B)** = 4 (i.e., processing 4 input examples simultaneously),
-- **Input Size (n)** = 3 (i.e., each input has 3 features),
-- **Neurons in Fully Connected Layer (m)** = 5 (i.e., there are 5 neurons in the layer).
+The resulting output \( Y \) will be of size \( (4, 1) \).
 
-In this case:
+---
 
-- Input matrix \( X \): \( (4, 3) \),
-- Weight matrix \( W \): \( (5, 3) \),
-- Bias vector \( b \): \( (5, 1) \),
-- Output matrix \( Y \): \( (4, 5) \).
+### Matrix Multiplication for Batched Inputs
+
+When processing multiple inputs at the same time (batched inputs), the matrix multiplication is generalized as:
+
+\[
+Z = X \cdot W^T + b
+\]
+
+Where:
+
+- \(X\) is the input matrix of size \((B, n)\),
+- \(W^T\) is the transposed weight matrix of size \((n, m)\),
+- \(b\) is the bias vector of size \((m, 1)\), broadcasted across all batch inputs,
+- \(Z\) is the output matrix of size \((B, m)\), where each row corresponds to the output for one input example.
+
+#### Example (Batched Inputs):
+
+- Let the batch size \( B = 5 \) (i.e., 5 input examples),
+- Let the input matrix \( X \) be of size \( (5, 3) \) (5 examples, each with 3 features),
+- Let the weight matrix \( W \) be of size \( (4, 3) \) (4 neurons, 3 input features),
+- Let the bias vector \( b \) be of size \( (4, 1) \).
+
+The resulting output matrix \( Y \) will be of size \( (5, 4) \).
 
 ---
 
@@ -85,21 +111,27 @@ In this case:
 After performing the linear transformation, an activation function \( f \) is applied element-wise to the output. Some common activation functions include:
 
 - **ReLU (Rectified Linear Unit)**:
+
   \[
   f(x) = \text{max}(0, x)
   \]
+
   ReLU is widely used due to its ability to mitigate the vanishing gradient problem.
 
 - **Sigmoid**:
+
   \[
   f(x) = \frac{1}{1 + e^{-x}}
   \]
+
   Sigmoid is useful for binary classification tasks, as it squashes the input between 0 and 1.
 
 - **Tanh (Hyperbolic Tangent)**:
+
   \[
   f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
   \]
+
   Tanh outputs values between -1 and 1, making it suitable for tasks where outputs should be centered around zero.
 
 ---
