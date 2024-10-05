@@ -1,7 +1,3 @@
-# Correcting the format for equations in markdown using proper LaTeX syntax
-
-logistic_regression_content = """
-
 # Introduction to Logistic Regression
 
 ## 1. What is Logistic Regression?
